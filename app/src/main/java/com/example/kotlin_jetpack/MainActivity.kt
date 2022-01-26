@@ -2,17 +2,31 @@ package com.example.kotlin_jetpack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.kotlin_jetpack.api.QuoteService
+import com.example.kotlin_jetpack.api.RetrofitHelper
 import com.example.kotlin_jetpack.databinding.ActivityMainBinding
+import com.example.kotlin_jetpack.repository.QuotesRepository
+import com.example.kotlin_jetpack.viewmodels.MainViewModel
+import com.example.kotlin_jetpack.viewmodels.MainviewModelFactory
 
 class MainActivity : AppCompatActivity() {
+
     lateinit var binding: ActivityMainBinding
+    lateinit var mainviewModel:MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        val quoteobj = Quotes("this is Hemant Kumar","Lucky roy")
-        binding.mainv =quoteobj
-     //   binding.quoteNames.text = "hello hemant"
-//        binding.quoteTextAuthor.text = "THis is author"
+       setContentView(R.layout.activity_main)
+
+        val  repository = (application as QuoteApplication).quotesRepository
+    mainviewModel = ViewModelProvider(this,MainviewModelFactory(repository)).get(MainViewModel::class.java)
+
+        mainviewModel.quotes.observe(this,{
+           // Log.d("HemantMVVM",it.results.toString())
+            Toast.makeText(this@MainActivity,it.results.size.toString(),Toast.LENGTH_LONG).show()
+        })
     }
 }
