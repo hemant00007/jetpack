@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        val quoteobj = Quotes("this is quotes","hemant kumar")
+        val quoteobj = Quotes("this is Hemant Kumar","Lucky roy")
         binding.mainv =quoteobj
      //   binding.quoteNames.text = "hello hemant"
 //        binding.quoteTextAuthor.text = "THis is author"
