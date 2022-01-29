@@ -12,8 +12,10 @@ class QuotesRepository(
     private val quoteService: QuoteService,
     private val quoteDatabase: QuoteDatabase,
    private val applicationContext: Context
+//    variables defined with var are mutable(Read and Write) variables defined with val are immutable(Read only)
 )
 {
+
     private  val quotesLiveData = MutableLiveData<Quotelist>()
     val  quotes : LiveData<Quotelist>
     get() = quotesLiveData
@@ -27,7 +29,8 @@ class QuotesRepository(
                 quoteDatabase.queteDao().addQuotes(result.body()!!.results)
                 quotesLiveData.postValue(result.body())
             }
-        }else{
+        } else
+        {
             val  quotes = quoteDatabase.queteDao().getQuotes()
             val quotelist = Quotelist(1,2,3,quotes,3,5)
             quotesLiveData.postValue(quotelist)

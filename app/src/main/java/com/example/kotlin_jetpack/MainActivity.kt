@@ -20,13 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        setContentView(R.layout.activity_main)
-
+        val name: String ="my name is hemant"
         val  repository = (application as QuoteApplication).quotesRepository
     mainviewModel = ViewModelProvider(this,MainviewModelFactory(repository)).get(MainViewModel::class.java)
 
         mainviewModel.quotes.observe(this,{
            // Log.d("HemantMVVM",it.results.toString())
-            Toast.makeText(this@MainActivity,it.results.size.toString(),Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity,it.results[0].content,Toast.LENGTH_LONG).show()
         })
     }
 }
