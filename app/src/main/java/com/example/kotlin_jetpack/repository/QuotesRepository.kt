@@ -25,7 +25,7 @@ class QuotesRepository(
         if (NetworkUtils.isInternetAvailable(applicationContext)){
             val result = quoteService.getQuotes(page)
             if (result?.body() != null){
-               // quoteDatabase.queteDao().getDelete()
+                quoteDatabase.queteDao().getDelete()
                 quoteDatabase.queteDao().addQuotes(result.body()!!.results)
                 quotesLiveData.postValue(result.body())
             }
